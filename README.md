@@ -1,1 +1,1 @@
-# slepleno-s-lyboiy
+# slepleno-s-lyboviy
