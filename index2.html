@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8f1e6">
+<title>Слеплено с любовью — домашние полуфабрикаты</title>
+<style>
+:root {
+  --cream: #fbf6ed;
+  --paper: #fffdf8;
+  --ink: #39291f;
+  --muted: #806f61;
+  --brown: #754a32;
+  --gold: #d8a45c;
+  --line: #eadccc;
+  --green: #4f7043;
+  --green-hover: #3e5a34;
+  --wa: #25d366;
+  --tg: #0088cc;
+  --max: #ff6b00;
+  --alert-bg: #fff3cd;
+  --alert-border: #ffeeba;
+  --alert-text: #856404;
+  --terracotta: #b85028;
+  --warm-gold: #e6b360;
+  --clay: #e8d1bc;
+  --shadow-sm: 0 2px 8px rgba(117, 74, 50, 0.05);
+  --shadow-md: 0 6px 18px rgba(117, 74, 50, 0.08);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+header {
+  padding: 32px 20px 26px;
+  text-align: center;
+  background: linear-gradient(135deg, #f3e5d3, #fffbf5);
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  font-family: Georgia, serif;
+  font-size: clamp(30px, 8vw, 44px);
+  line-height: 1.1;
+  margin: 6px 0 10px;
+  color: var(--brown);
+  font-weight: bold;
+}
+.eyebrow {
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 700;
+}
+header p {
+  margin: 0 auto;
+  max-width: 480px;
+  color: #6f5949;
+  font-size: 14px;
+}
+
+.wrap {
+  max-width: 920px;
+  margin: auto;
+  padding: 20px 14px 110px;
+}
+
+.notice {
+  background: #f4eaeb;
+  border: 1px solid #e2cfd2;
+  border-left: 4px solid var(--terracotta);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  color: #5e3b33;
+}
+
+.status-banner {
+  background: var(--alert-bg);
+  border: 1px solid var(--alert-border);
+  color: var(--alert-text);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+.status-banner.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.admin-bar {
+  background: #f3e5d2;
+  border: 2px dashed #caaa8d;
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 22px;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.admin-btn {
+  background: var(--brown);
+  color: white;
+  border: 0;
+  padding: 7px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+.admin-btn:hover { opacity: 0.9; }
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 8px;
+  width: 100%;
+  background: #fbf5e8;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e4d3bc;
+}
+.admin-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  background: #ffffff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  user-select: none;
+  transition: background-color 0.15s;
+}
+.admin-item:hover { background: #fff8ee; }
+.admin-item input { accent-color: var(--green); cursor: pointer; width: 16px; height: 16px; }
+
+h2 {
+  font-family: Georgia, serif;
+  font-size: 24px;
+  margin: 28px 0 14px;
+  color: var(--brown);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.product {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  min-height: 185px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.product:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.product .emoji { 
+  font-size: 32px; 
+  margin-bottom: 6px; 
+  display: flex;
+  align-items: center;
+  height: 48px;
+}
+.product .emoji img {
+  max-height: 48px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.product h3 { font-size: 15px; margin: 0 0 4px; line-height: 1.3; font-weight: 700; color: var(--ink); }
+.desc { font-size: 12px; color: var(--muted); flex: 1; }
+.price { font-weight: 800; color: var(--brown); margin: 10px 0 8px; font-size: 15px; }
+
+.preorder-badge {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  align-self: flex-start;
+  color: #fff;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.controls button {
+  border: 0;
+  background: #efe1cf;
+  color: var(--brown);
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+}
+.controls button:active { transform: scale(0.92); }
+.controls button:hover { background: #e2ceb7; }
+.qty { min-width: 42px; text-align: center; font-weight: 700; font-size: 14px; }
+
+.field { display: block; font-size: 13px; font-weight: 700; margin: 14px 0 6px; color: var(--ink); }
+.input, select, textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: white;
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--ink);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(216, 164, 92, 0.2);
+}
+textarea { min-height: 80px; resize: vertical; }
+
+.chef-date-card {
+  background: linear-gradient(145deg, #fffcf7, #f7ebd9);
+  border: 2px solid var(--gold);
+  border-radius: 18px;
+  padding: 16px;
+  margin-top: 16px;
+  box-shadow: 0 4px 15px rgba(117, 74, 50, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+.chef-date-card::before {
+  content: '👨‍🍳';
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  font-size: 68px;
+  opacity: 0.12;
+  pointer-events: none;
+}
+.chef-date-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--brown);
+  margin-bottom: 6px;
+}
+.chef-date-input-wrap {
+  position: relative;
+  margin: 10px 0 8px;
+}
+.chef-date-input {
+  width: 100%;
+  border: 2px solid var(--clay);
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 12px 14px 12px 44px;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--brown);
+  cursor: pointer;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+  transition: all 0.2s ease;
+}
+.chef-date-input:focus {
+  outline: none;
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(184, 80, 40, 0.15);
+}
+.chef-date-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  pointer-events: none;
+}
+.chef-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(184, 80, 40, 0.1);
+  color: var(--terracotta);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 18px;
+  margin-top: 18px;
+  box-shadow: var(--shadow-sm);
+}
+.rowline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 14px;
+}
+.total {
+  font-size: 20px;
+  font-weight: 800;
+  border-top: 1px solid var(--line);
+  margin-top: 8px;
+  padding-top: 14px;
+  color: var(--brown);
+}
+.small { font-size: 12px; color: var(--muted); }
+
+.legal-box {
+  background: #faf5ed;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.checkrow {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 12px;
+  color: var(--muted);
+}
+.checkrow input { margin-top: 2px; accent-color: var(--green); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; }
+.checkrow a { color: var(--brown); text-decoration: underline; cursor: pointer; font-weight: 600; }
+
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+.cta {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px;
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.cta:active { transform: scale(0.99); }
+.cta:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.cta-wa { background: var(--wa); }
+.cta-tg { background: var(--tg); }
+.cta-max { background: var(--max); }
+.secondary { background: #eee1d0; color: var(--brown); margin-top: 10px; }
+.secondary:hover { background: #e5d4c0; }
+
+footer {
+  text-align: center;
+  padding: 28px 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+footer a { color: var(--brown); text-decoration: underline; margin: 0 6px; cursor: pointer; }
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.modal.active { display: flex; animation: fadeIn 0.2s ease; }
+.modal-content {
+  background: var(--paper);
+  border-radius: 20px;
+  max-width: 700px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  position: relative;
+}
+.modal-content h3 { margin-top: 0; color: var(--brown); font-family: Georgia, serif; }
+.modal-content h4 { margin: 16px 0 6px; color: var(--brown); font-size: 14px; }
+.modal-close {
+  position: absolute;
+  top: 16px; right: 16px;
+  border: 0; background: none;
+  font-size: 24px; cursor: pointer;
+  color: var(--muted);
+}
+
+.sticky {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(251, 246, 237, 0.94);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
+  z-index: 100;
+}
+.sticky strong { font-size: 18px; color: var(--brown); }
+.sticky button {
+  border: 0;
+  background: var(--green);
+  color: white;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.sticky button:hover { background: var(--green-hover); }
+
+@media(min-width: 650px) {
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .wrap { padding-top: 28px; }
+  .cta-group { flex-direction: row; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Домашние полуфабрикаты · Романовка</div>
+  <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+    <div class="brand" id="brandTitle" style="margin: 0;">Слеплено с любовью</div>
+    <button onclick="openAdminModal()" title="Панель хозяйки" style="background: none; border: none; font-size: 28px; cursor: pointer; padding: 0; line-height: 1; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">👨‍🍳</button>
+  </div>
+  <p style="margin-top: 10px;">Вручную, с заботой и по-домашнему ❤️ Выбирайте любимые вкусы — посчитаем заказ и доставку.</p>
+</header>
+
+<main class="wrap">
+  <div class="admin-bar" id="adminBar" style="display: none;">
+    <div class="admin-header">
+      <span>⚙️ <strong>Панель хозяйки: наличие и предзаказ позиций</strong></span>
+      <div style="display:flex; gap:6px;">
+        <button class="admin-btn" onclick="toggleAllStock(true)">Всё в наличии</button>
+        <button class="admin-btn" style="background:var(--terracotta);" onclick="toggleAllStock(false)">Всё под заказ</button>
+        <button class="admin-btn" style="background:var(--muted);" onclick="hideAdminBar()">Скрыть</button>
+      </div>
+    </div>
+    <div class="small" style="color:var(--muted)">Отметьте галочками товары в наличии. Товары без галочки переходят в режим <b>«Под заказ»</b> (с авто-расчетом даты готовности).</div>
+    <div class="admin-grid" id="adminStockGrid"></div>
+  </div>
+
+  <div class="status-banner" id="preorderOnlyBanner">
+    ⚠️ <strong>Обратите внимание!</strong> В вашем заказе есть позиции <b>под заказ</b> (срок лепки — от 2 дней). Календарь автоматически скорректировал ближайшую дату готовности.
+  </div>
+
+  <div class="notice">🌿 Домашний вкус и забота в каждой заготовке. Ручная лепка с душой. Дальняя доставка — по согласованному маршруту.</div>
+
+  <h2>🥟 Вареники</h2>
+  <div class="grid" id="vareniki"></div>
+
+  <h2>🥟 Пельмени</h2>
+  <div class="grid" id="pelmeni"></div>
+
+  <h2>🥞 Блинчики и спецпредложения</h2>
+  <div class="grid" id="other"></div>
+
+  <h2>🚗 Доставка и оформление</h2>
+  <div class="panel">
+    <label class="field" for="town">Куда доставить?</label>
+    <select id="town">
+      <option value="Романовка">Романовка — бесплатно</option>
+      <option value="Смоляниново">Смоляниново — 400 ₽ при заказе до 5 000 ₽</option>
+      <option value="Новонежино">Новонежино — 450 ₽ при заказе до 5 000 ₽</option>
+      <option value="Шкотово">Шкотово — 600 ₽ при заказе до 5 000 ₽</option>
+      <option value="Большой Камень">Большой Камень — 600 ₽ при заказе до 5 000 ₽</option>
+    </select>
+    <div class="small" style="margin-top:6px;">При заказе от 5 000 ₽ доставка бесплатная по предварительному заказу и в согласованный день.</div>
+
+    <div class="notice" style="margin-top:12px; margin-bottom:0; padding:10px 12px; font-size:12px; border-radius:12px; background:#f8eee2; border-color:#e6d3bf;">
+      ⏰ <strong>Время доставки:</strong> с 9:00 до 18:00.<br>
+      🌧️ <strong>Обратите внимание:</strong> в связи с погодными условиями возможны задержки или перенос доставки по согласованию.
+    </div>
+
+    <label class="field" for="customer">Ваше имя</label>
+    <input class="input" id="customer" placeholder="Как к вам обращаться">
+
+    <label class="field" for="phone">Контактный телефон</label>
+    <input class="input" id="phone" type="tel" placeholder="+7 (___) ___-__-__">
+
+    <label class="field" for="address">Адрес / место передачи</label>
+    <input class="input" id="address" placeholder="Улица, дом или удобное место">
+    
+    <!-- Chef Styled Date Picker -->
+    <div class="chef-date-card">
+      <div class="chef-date-header">
+        <span>👨‍🍳 Дата подачи на ваш стол</span>
+      </div>
+      <div class="small" style="color:var(--muted)">Выберите день, когда вам привезти свежие домашние полуфабрикаты:</div>
+      
+      <div class="chef-date-input-wrap">
+        <span class="chef-date-icon">🗓️</span>
+        <input class="chef-date-input" id="date" type="date">
+      </div>
+      
+      <div class="chef-badge" id="dateBadge">
+        ✨ Заботливая ручная лепка под заказ
+      </div>
+      <div class="small" id="dateHint" style="margin-top:6px; color:var(--brown); font-weight:600;">📅 Ближайшая дата доставки — с сегодняшнего дня при наличии.</div>
+    </div>
+
+    <label class="field" for="comment">Комментарий к заказу</label>
+    <textarea id="comment" placeholder="Например, удобное время или пожелания к лепке"></textarea>
+  </div>
+
+  <div class="panel" aria-live="polite">
+    <h2 style="margin-top:0;">Ваш заказ</h2>
+    <div id="summary"><div class="small">Пока ничего не выбрано — добавьте товары выше.</div></div>
+    <div class="rowline"><span>Товары</span><strong id="subtotal">0 ₽</strong></div>
+    <div class="rowline"><span>Доставка</span><strong id="delivery">0 ₽</strong></div>
+    <div class="rowline total"><span>Итого</span><strong id="grand">0 ₽</strong></div>
+    <div class="small" id="deliveryNote">Выберите товары и населённый пункт — стоимость посчитается автоматически.</div>
+    
+    <div class="legal-box">
+      <div class="checkrow">
+        <input type="checkbox" id="ofertaConsent" checked onchange="toggleCta()">
+        <label for="ofertaConsent">Я ознакомился(лась) и принимаю условия <a onclick="openModal('ofertaModal')">Публичной оферты</a>.</label>
+      </div>
+      <div class="checkrow">
+        <input type="checkbox" id="policyConsent" checked onchange="toggleCta()">
+        <label for="policyConsent">Даю согласие на обработку персональных данных в соответствии с <a onclick="openModal('privacyModal')">Политикой конфиденциальности</a>.</label>
+      </div>
+    </div>
+
+    <div class="cta-group">
+      <button class="cta cta-wa" id="btnWa" onclick="sendOrder('wa')">WhatsApp</button>
+      <button class="cta cta-tg" id="btnTg" onclick="sendOrder('tg')">Telegram</button>
+      <button class="cta cta-max" id="btnMax" onclick="sendOrder('max')">MAX</button>
+    </div>
+    <button class="cta secondary" onclick="resetCart()">Очистить корзину</button>
+    <p class="small" style="margin-top:10px;">Нажатие открывает выбранный мессенджер с подготовленным текстом. Заказ считается отправленным только после нажатия «Отправить» в мессенджере.</p>
+  </div>
+
+  <footer>
+    Слеплено с любовью · Романовка<br>
+    Заказы: +7 (914) 322-91-98<br><br>
+    <a onclick="openModal('ofertaModal')">Публичная оферта</a> | 
+    <a onclick="openModal('privacyModal')">Политика конфиденциальности</a>
+  </footer>
+</main>
+
+<div class="modal" id="maxCopyModal">
+  <div class="modal-content" style="max-width:450px; text-align:center;">
+    <button class="modal-close" onclick="closeModal('maxCopyModal')">&times;</button>
+    <h3 style="margin-bottom:10px;">📋 Текст заказа скопирован!</h3>
+    <p class="small" style="line-height:1.5; color:var(--ink); margin-bottom:18px;">
+      Детали вашего заказа скопированы в буфер обмена. Переходим в мессенджер <b>MAX</b> — просто вставьте скопированное сообщение в чат!
+    </p>
+    <button class="cta cta-max" onclick="closeModal('maxCopyModal')">Понятно</button>
+  </div>
+</div>
+
+<div class="modal" id="ofertaModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('ofertaModal')">&times;</button>
+    <h3>Публичная оферта на продажу продовольственных товаров</h3>
+    <div class="small" style="line-height:1.6; color:var(--ink)">
+      <p>Настоящий документ представляет собой официальное публичное предложение (публичную оферту в соответствии со ст. 437 Гражданского кодекса Российской Федерации) Продавца сервиса «Слеплено с любовью» о продаже замороженных домашних полуфабрикатов ручной лепки.</p>
+      
+      <h4>1. Реквизиты Продавца и условия акцепта</h4>
+      <p>1.1. <b>Продавец</b> — Самозанятая Иваненко Елена Тимофеевна (плательщик налога на профессиональный доход, ИНН: 253714156782), осуществляет реализацию продукции под брендом «Слеплено с любовью» (телефон: +7 914 322 91 98).<br>
+      1.2. <b>Покупатель</b> — любое дееспособное физическое лицо, формирующее и отправляющее Заказ на Сайте.<br>
+      1.3. <b>Акцепт Оферты</b> — полное и безоговорочное принятие условий оферты путем нажатия кнопки отправки заказа в выбранный мессенджер с установленным флажком согласия.</p>
+
+      <h4>2. Предмет Договора</h4>
+      <p>2.1. Продавец обязуется передать в собственность Покупателя замороженные продовольственные полуфабрикаты, а Покупатель обязуется принять и оплатить Товар.<br>
+      2.2. Изображения Товара на сайте носят справочный характер. В связи с ручным способом лепки внешний вид готовых изделий может незначительно отличаться от иллюстраций.</p>
+
+      <h4>3. Оформление Заказа и Сроки изготовления</h4>
+      <p>3.1. Заказ формируется Покупателем самостоятельно.<br>
+      3.2. Позиции, не отмеченные как «В наличии», производятся <b>под заказ</b> (ручная лепка). Минимальный срок изготовления таких позиций составляет от 2 (двух) календарных дней.<br>
+      3.3. Финальный состав, итоговая стоимость и дата доставки подтверждаются Продавцом в переписке в мессенджере.</p>
+
+      <h4>4. Оплата и Доставка</h4>
+      <p>4.1. Цены указаны в рублях за 1 килограмм. Оплата производится переводом или наличными при получении.<br>
+      4.2. Доставка осуществляется с 09:00 до 18:00 по населенным пунктам: Романовка, Смоляниново, Новонежино, Шкотово, Большой Камень.<br>
+      4.3. При заказе от 5 000 рублей доставка бесплатная в согласованный день.</p>
+
+      <h4>5. Приемка и Возврат</h4>
+      <p>5.1. Покупатель проверяет наименование, количество и целостность упаковки в момент получения.<br>
+      5.2. Согласно Закону РФ «О защите прав потребителей», <b>продовольственные товары надлежащего качества возврату и обмену не подлежат</b>.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="privacyModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('privacyModal')">&times;</button>
+    <h3>Политика обработки персональных данных (152-ФЗ)</h3>
+    <div class="small" style="line-height:1.6; color:var(--ink)">
+      <p>Настоящая Политика определяет порядок обработки и защиты персональных данных пользователей сервиса «Слеплено с любовью» Оператором — Самозанятой Иваненко Еленой Тимофеевной (ИНН: 253714156782) в соответствии с Федеральным законом № 152-ФЗ «О персональных данных».</p>
+      
+      <h4>1. Собираемые данные</h4>
+      <p>Оператор обрабатывает следующие персональные данные, вводимые пользователем: имя, контактный телефон, адрес доставки, населенный пункт, комментарии к заказу и выбранная дата доставки.</p>
+      
+      <h4>2. Цели и способы обработки</h4>
+      <p>2.1. Данные обрабатываются исключительно в целях расчета стоимости заказа, связи с Покупателем для подтверждения покупки и организации доставки замороженной продукции.<br>
+      2.2. Сайт не использует сторонние базы данных или удаленные серверы для хранения персональных данных. Введенная информация сохраняется локально на устройстве пользователя (в браузере) и передается напрямую Оператору при отправке сообщения в выбранный мессенджер (WhatsApp, Telegram, MAX).</p>
+
+      <h4>3. Сроки хранения и безопасность</h4>
+      <p>3.1. Оператор обрабатывает персональные данные только в течение срока, необходимого для выполнения заказа и подтверждения доставки.<br>
+      3.2. Оператор принимает все необходимые меры для защиты персональных данных в используемых мессенджерах и на личном устройстве.</p>
+
+      <h4>4. Права пользователя и отзыв согласия</h4>
+      <p>Пользователь вправе отозвать согласие на обработку персональных данных или направить запрос на их уточнение/удаление, написав Оператору в мессенджер по телефону +7 (914) 322-91-98.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="adminPassModal">
+  <div class="modal-content" style="max-width:380px; text-align:center;">
+    <button class="modal-close" onclick="closeModal('adminPassModal')">&times;</button>
+    <div style="font-size: 40px; margin-bottom: 6px;">👨‍🍳</div>
+    <h3 style="margin-bottom:8px;">Вход в Панель хозяйки</h3>
+    <p class="small" style="margin-bottom:14px; color:var(--muted);">Введите ваш личный код доступа:</p>
+    <input type="password" id="adminPassword" class="input" placeholder="Введите код" style="text-align:center; font-size:16px; margin-bottom:12px;" onkeydown="if(event.key==='Enter') checkAdminPassword()">
+    <div class="cta-group">
+      <button class="cta secondary" style="margin:0;" onclick="checkAdminPassword()">Войти</button>
+    </div>
+  </div>
+</div>
+
+<div class="sticky">
+  <div>
+    <div class="small">Сумма заказа</div>
+    <strong id="stickyTotal">0 ₽</strong>
+  </div>
+  <button onclick="document.querySelector('.panel:last-of-type').scrollIntoView({behavior:'smooth',block:'start'})">К оформлению ↓</button>
+</div>
+
+<script>
+let clickCount = 0;
+let clickTimer = null;
+const ADMIN_PASSWORD = "sofia561299"; // Ваш персональный код доступа
+
+function setupSecretAdminAccess() {
+  const brandTitle = document.getElementById('brandTitle');
+  if (brandTitle) {
+    brandTitle.addEventListener('click', () => {
+      clickCount++;
+      clearTimeout(clickTimer);
+      if (clickCount >= 5) {
+        clickCount = 0;
+        openAdminModal();
+      } else {
+        clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
+      }
+    });
+  }
+
+  // Also enable URL hash access: #admin
+  if (window.location.hash === '#admin') {
+    openAdminModal();
+  }
+}
+
+function openAdminModal() {
+  document.getElementById('adminPassword').value = '';
+  openModal('adminPassModal');
+  setTimeout(() => document.getElementById('adminPassword').focus(), 100);
+}
+
+function checkAdminPassword() {
+  const val = document.getElementById('adminPassword').value;
+  if (val === ADMIN_PASSWORD) {
+    closeModal('adminPassModal');
+    showAdminBar();
+  } else {
+    openNotificationModal('Неверный код доступа!');
+  }
+}
+
+function showAdminBar() {
+  const bar = document.getElementById('adminBar');
+  if (bar) {
+    bar.style.display = 'flex';
+    bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function hideAdminBar() {
+  const bar = document.getElementById('adminBar');
+  if (bar) bar.style.display = 'none';
+}
+
+const products = [
+ // Замените ссылки ниже на реальные ссылки из вашего GitHub (Кнопка Raw на файле):
+ // Пример ссылки: https://raw.githubusercontent.com/ваш_логин/ваш_репозиторий/main/images/v1.png
+ {id:'v1',cat:'vareniki',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/v1.png" alt="Картофель с луком" onerror="this.outerHTML=\'🥟\'">',name:'Картофель с жареным луком',price:350},
+ {id:'v2',cat:'vareniki',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/v2.png" alt="Картофель с маслом" onerror="this.outerHTML=\'🥟\'">',name:'Картофель со сливочным маслом и домашним яйцом',price:350},
+ {id:'v3',cat:'vareniki',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/v3.png" alt="Картофель с грибами" onerror="this.outerHTML=\'🥟\'">',name:'Картофель с грибами',price:400},
+ {id:'v4',cat:'vareniki',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/v4.png" alt="Картофель с печенью" onerror="this.outerHTML=\'🥟\'">',name:'Картофель с куриной печенью',price:400},
+ {id:'v5',cat:'vareniki',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/v5.png" alt="Картофель и капуста" onerror="this.outerHTML=\'🥟\'">',name:'Картофель + капуста',price:400},
+ {id:'v6',cat:'vareniki',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/v6.png" alt="Капуста" onerror="this.outerHTML=\'🥟\'">',name:'Капуста',price:400},
+ {id:'v7',cat:'vareniki',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/v7.png" alt="Капуста с фаршем" onerror="this.outerHTML=\'🥟\'">',name:'Капуста + фарш',price:450},
+ {id:'v8',cat:'vareniki',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/v8.png" alt="Творог" onerror="this.outerHTML=\'🥟\'">',name:'Вареники с творогом',price:600},
+ {id:'p1',cat:'pelmeni',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/p1.png" alt="Пельмени со свининой" onerror="this.outerHTML=\'🥟\'">',name:'Пельмени со свининой',price:550},
+ {id:'p2',cat:'pelmeni',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/p2.png" alt="Рыбные пельмени" onerror="this.outerHTML=\'🐟\'">',name:'Рыбные пельмени из краснопёрки',price:500},
+ {id:'o1',cat:'other',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/o1.png" alt="Ленивые голубцы" onerror="this.outerHTML=\'🍲\'">',name:'Ленивые голубцы',price:650},
+ {id:'o2',cat:'other',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/o2.png" alt="Блинчики с фаршем" onerror="this.outerHTML=\'🥞\'">',name:'Блинчики с фаршем и рисом',price:650},
+ {id:'o3',cat:'other',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/o3.png" alt="Блинчики с печенью" onerror="this.outerHTML=\'🥞\'">',name:'Блинчики с куриной печенью и рисом',price:650},
+ {id:'o4',cat:'other',emoji:'<img src="https://raw.githubusercontent.com/username/repository/main/images/o4.png" alt="Блинчики с творогом" onerror="this.outerHTML=\'🥞\'">',name:'Блинчики с творогом',price:650}
+];
+
+let qty = {};
+let inStock = {};
+
+function loadState() {
+  try {
+    const savedQty = localStorage.getItem('craft_cart_qty');
+    if(savedQty) qty = JSON.parse(savedQty);
+
+    const savedStock = localStorage.getItem('craft_stock_status');
+    if(savedStock) {
+      inStock = JSON.parse(savedStock);
+    } else {
+      products.forEach(p => {
+        inStock[p.id] = !(p.id === 'v8' || (p.cat === 'other' && p.id !== 'o1'));
+      });
+    }
+
+    const savedCustomer = localStorage.getItem('craft_customer');
+    if(savedCustomer) document.getElementById('customer').value = savedCustomer;
+
+    const savedPhone = localStorage.getItem('craft_phone');
+    if(savedPhone) document.getElementById('phone').value = savedPhone;
+
+    const savedAddress = localStorage.getItem('craft_address');
+    if(savedAddress) document.getElementById('address').value = savedAddress;
+
+    const savedTown = localStorage.getItem('craft_town');
+    if(savedTown && document.getElementById('town')) document.getElementById('town').value = savedTown;
+  } catch(e) {
+    console.warn("Could not load saved state", e);
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('craft_cart_qty', JSON.stringify(qty));
+    localStorage.setItem('craft_stock_status', JSON.stringify(inStock));
+    localStorage.setItem('craft_customer', document.getElementById('customer').value);
+    localStorage.setItem('craft_phone', document.getElementById('phone').value);
+    localStorage.setItem('craft_address', document.getElementById('address').value);
+    localStorage.setItem('craft_town', document.getElementById('town').value);
+  } catch(e) {}
+}
+
+const rub = n => Math.round(n).toLocaleString('ru-RU') + ' ₽';
+
+function renderAdminGrid(){
+  const container = document.getElementById('adminStockGrid');
+  if(!container) return;
+  container.innerHTML = products.map(p => `
+    <label class="admin-item">
+      <input type="checkbox" ${inStock[p.id] ? 'checked' : ''} onchange="toggleProductStock('${p.id}', this.checked)">
+      <span>${p.emoji} ${p.name}</span>
+    </label>
+  `).join('');
+}
+
+function toggleProductStock(id, isAvailable){
+  inStock[id] = isAvailable;
+  saveState();
+  checkPreorderStatus();
+  renderProducts();
+  update();
+}
+
+function toggleAllStock(status){
+  products.forEach(p => inStock[p.id] = status);
+  saveState();
+  renderAdminGrid();
+  checkPreorderStatus();
+  renderProducts();
+  update();
+}
+
+function hasPreorderItemsInCart(){
+  return products.some(p => (qty[p.id] || 0) > 0 && !inStock[p.id]);
+}
+
+function checkPreorderStatus(){
+  const banner = document.getElementById('preorderOnlyBanner');
+  const isAnyPreorder = hasPreorderItemsInCart();
+  if(banner){
+    if(isAnyPreorder){
+      banner.classList.add('active');
+    } else {
+      banner.classList.remove('active');
+    }
+  }
+  setupDatePicker();
+}
+
+function setupDatePicker(){
+  const dateInput = document.getElementById('date');
+  const dateHint = document.getElementById('dateHint');
+  const dateBadge = document.getElementById('dateBadge');
+  if(!dateInput) return;
+  
+  const today = new Date();
+  const requiresPreorder = hasPreorderItemsInCart();
+  const minDays = requiresPreorder ? 2 : 0;
+  
+  const minDate = new Date(today);
+  minDate.setDate(today.getDate() + minDays);
+  
+  const yyyy = minDate.getFullYear();
+  const mm = String(minDate.getMonth() + 1).padStart(2, '0');
+  const dd = String(minDate.getDate()).padStart(2, '0');
+  
+  dateInput.min = `${yyyy}-${mm}-${dd}`;
+  
+  if(!dateInput.value || dateInput.value < `${yyyy}-${mm}-${dd}`){
+    dateInput.value = `${yyyy}-${mm}-${dd}`;
+  }
+
+  if(requiresPreorder){
+    if(dateBadge) dateBadge.innerHTML = '👩‍🍳 Есть товары под заказ (готовность от 2 дней)';
+    if(dateHint) dateHint.textContent = `⏳ В корзине есть позиции под заказ. Ближайшая дата доставки — ${dd}.${mm}.${yyyy}`;
+  } else {
+    if(dateBadge) dateBadge.innerHTML = '✨ Все выбранные товары в наличии';
+    if(dateHint) dateHint.textContent = `📅 Все позиции в наличии! Доставка возможна с сегодняшнего дня.`;
+  }
+}
+
+function renderProducts(){
+ for(const cat of ['vareniki','pelmeni','other']){
+  const el = document.getElementById(cat);
+  if(!el) continue;
+  el.innerHTML=products.filter(p=>p.cat===cat).map(p=>{
+    const isAvailable = inStock[p.id];
+    const badgeHtml = isAvailable 
+      ? `<div class="preorder-badge" style="background:var(--green)">✓ В наличии</div>` 
+      : `<div class="preorder-badge" style="background:var(--warm-gold)">⏳ Под заказ</div>`;
+    const descText = isAvailable ? 'Цена за 1 кг · В наличии' : 'Цена за 1 кг · Свежая лепка под заказ';
+    
+    return `
+      <article class="product">
+        ${badgeHtml}
+        <div class="emoji">${p.emoji}</div>
+        <h3>${p.name}</h3>
+        <div class="desc">${descText}</div>
+        <div class="price">${rub(p.price)}/кг</div>
+        <div class="controls">
+          <button aria-label="Уменьшить ${p.name}" onclick="change('${p.id}',-1)">−</button>
+          <span class="qty" id="q-${p.id}">${qty[p.id]||0} кг</span>
+          <button aria-label="Добавить ${p.name}" onclick="change('${p.id}',1)">+</button>
+        </div>
+      </article>`;
+  }).join('');
+ }
+}
+
+function change(id, delta){
+ qty[id] = Math.max(0, (qty[id]||0) + delta);
+ saveState();
+ document.getElementById('q-'+id).textContent = (qty[id]||0) + ' кг';
+ checkPreorderStatus();
+ update();
+}
+
+function calc(){
+ let subtotal = products.reduce((s,p) => s + (qty[p.id]||0) * p.price, 0);
+ const townSelect = document.getElementById('town');
+ const town = townSelect ? townSelect.value : 'Романовка';
+ let delivery = 0, note = '';
+ if(town === 'Романовка') { delivery = 0; note = 'Доставка по Романовке бесплатная.'; }
+ else if(subtotal >= 5000) { delivery = 0; note = 'Бесплатная доставка от 5 000 ₽ — по предварительному заказу и в согласованный день.'; }
+ else if(town === 'Смоляниново') { delivery = 400; note = 'Доставка в Смоляниново: 400 ₽ при заказе до 5 000 ₽.'; }
+ else if(town === 'Новонежино') { delivery = 450; note = 'Доставка в Новонежино: 450 ₽ при заказе до 5 000 ₽.'; }
+ else if(town === 'Шкотово') { delivery = 600; note = 'Доставка в Шкотово: 600 ₽ при заказе до 5 000 ₽.'; }
+ else if(town === 'Большой Камень') { delivery = 600; note = 'Доставка в Большой Камень: 600 ₽ при заказе до 5 000 ₽.'; }
+ return {subtotal, delivery, grand: subtotal + delivery, note, town};
+}
+
+function update(){
+ const c = calc();
+ const lines = products.filter(p => (qty[p.id]||0) > 0).map(p => {
+   const tag = inStock[p.id] ? '' : ' (предзаказ)';
+   return `<div class="rowline"><span>${p.name}${tag} — ${qty[p.id]} кг</span><strong>${rub(qty[p.id]*p.price)}</strong></div>`;
+ });
+ document.getElementById('summary').innerHTML = lines.length ? lines.join('') : '<div class="small">Пока ничего не выбрано — добавьте товары выше.</div>';
+ document.getElementById('subtotal').textContent = rub(c.subtotal);
+ document.getElementById('delivery').textContent = c.delivery === 0 ? 'Бесплатно' : rub(c.delivery);
+ document.getElementById('grand').textContent = rub(c.grand);
+ document.getElementById('stickyTotal').textContent = rub(c.grand);
+ document.getElementById('deliveryNote').textContent = c.note;
+}
+
+async function sendOrder(channel){
+ const c = calc();
+ const hasItems = products.some(p => (qty[p.id]||0) > 0);
+ if(!hasItems){
+   openNotificationModal('Пожалуйста, добавьте хотя бы один товар в корзину.');
+   return;
+ }
+ const name = document.getElementById('customer').value.trim();
+ const phone = document.getElementById('phone').value.trim();
+ if(!name){
+   document.getElementById('customer').focus();
+   openNotificationModal('Пожалуйста, укажите ваше имя.');
+   return;
+ }
+ if(!phone || phone.length < 10){
+   document.getElementById('phone').focus();
+   openNotificationModal('Пожалуйста, укажите корректный контактный телефон.');
+   return;
+ }
+ saveState();
+
+ const lines = products.filter(p => (qty[p.id]||0) > 0).map(p => `• ${p.name}${!inStock[p.id] ? ' (Предзаказ)' : ' (В наличии)'}: ${qty[p.id]} кг × ${p.price} ₽ = ${rub(qty[p.id]*p.price)}`);
+ const date = document.getElementById('date').value || 'не указана';
+ const address = document.getElementById('address').value.trim() || 'не указан';
+ const comment = document.getElementById('comment').value.trim() || 'нет';
+ const hasPreorders = hasPreorderItemsInCart();
+ const orderTypeNotice = hasPreorders ? "\n⚠️ [В заказе есть товары под заказ]" : "";
+ const msg = `Здравствуйте! Хочу оформить заказ «Слеплено с любовью» ❤️${orderTypeNotice}\n\nИмя: ${name}\nТелефон: ${phone}\nДоставка: ${c.town}\nАдрес: ${address}\nЖелаемая дата: ${date} (время доставки с 9:00 до 18:00)\n\nСостав заказа:\n${lines.join('\n')}\n\nТовары: ${rub(c.subtotal)}\nДоставка: ${c.delivery === 0 ? 'бесплатно' : rub(c.delivery)}\nИтого с доставкой: ${rub(c.grand)}\nКомментарий: ${comment}\n\n*Учитываю, что при непогоде возможны задержки или перенос доставки.\nПодтвердите, пожалуйста, наличие и время.`;
+
+ const encodedMsg = encodeURIComponent(msg);
+ const phoneNum = '79143229198';
+
+ if (channel === 'wa') {
+   const waUrl = `https://wa.me/${phoneNum}?text=${encodedMsg}`;
+   window.open(waUrl, '_blank') || (window.location.href = waUrl);
+ } else if (channel === 'tg') {
+   const tgUrl = `https://t.me/+79143229198?text=${encodedMsg}`;
+   window.open(tgUrl, '_blank') || (window.location.href = tgUrl);
+ } else if (channel === 'max') {
+   try {
+     if (navigator.clipboard && navigator.clipboard.writeText) {
+       await navigator.clipboard.writeText(msg);
+     } else {
+       const textarea = document.createElement('textarea');
+       textarea.value = msg;
+       textarea.style.position = 'fixed';
+       textarea.style.opacity = '0';
+       document.body.appendChild(textarea);
+       textarea.select();
+       document.execCommand('copy');
+       document.body.removeChild(textarea);
+     }
+     openModal('maxCopyModal');
+   } catch(e) {
+     openNotificationModal('Скопируйте ваш заказ и отправьте его в чат.');
+   }
+   setTimeout(() => {
+     window.open('https://max.ru', '_blank') || (window.location.href = 'https://max.ru');
+   }, 600);
+ }
+}
+
+function openNotificationModal(text) {
+  let modal = document.getElementById('customNotifModal');
+  if(!modal) {
+    modal = document.createElement('div');
+    modal.id = 'customNotifModal';
+    modal.className = 'modal';
+    modal.innerHTML = `
+      <div class="modal-content" style="max-width:400px; text-align:center;">
+        <button class="modal-close" onclick="closeModal('customNotifModal')">&times;</button>
+        <div style="font-size:36px; margin-bottom:8px;">💡</div>
+        <div id="customNotifText" style="font-size:14px; color:var(--ink); margin-bottom:18px; line-height:1.4;"></div>
+        <button class="cta secondary" onclick="closeModal('customNotifModal')">Понятно</button>
+      </div>`;
+    document.body.appendChild(modal);
+  }
+  document.getElementById('customNotifText').textContent = text;
+  openModal('customNotifModal');
+}
+
+function resetCart(){
+  for(const k in qty) delete qty[k];
+  saveState();
+  checkPreorderStatus();
+  renderProducts();
+  update();
+}
+
+function toggleCta(){
+  const ofertaConsent = document.getElementById('ofertaConsent').checked;
+  const policyConsent = document.getElementById('policyConsent').checked;
+  const isAllowed = ofertaConsent && policyConsent;
+  ['btnWa', 'btnTg', 'btnMax'].forEach(id => {
+    const btn = document.getElementById(id);
+    if(btn) btn.disabled = !isAllowed;
+  });
+}
+
+function openModal(id){
+  const el = document.getElementById(id);
+  if(el) el.classList.add('active');
+}
+
+function closeModal(id){
+  const el = document.getElementById(id);
+  if(el) el.classList.remove('active');
+}
+
+function initPhoneMask() {
+  const phoneInput = document.getElementById('phone');
+  if(!phoneInput) return;
+
+  phoneInput.addEventListener('input', (e) => {
+    let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+    if (!x[2]) {
+      e.target.value = x[1] ? '+' + x[1] : '';
+    } else {
+      e.target.value = '!+' + (x[1] || '7') + ' (' + x[2] + (x[3] ? ') ' + x[3] : '') + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
+      e.target.value = e.target.value.replace('!', '');
+    }
+    saveState();
+  });
+}
+
+window.onload = function() {
+  loadState();
+  initPhoneMask();
+  setupSecretAdminAccess();
+
+  const townSelect = document.getElementById('town');
+  if(townSelect) townSelect.addEventListener('change', () => { saveState(); update(); });
+  
+  ['customer', 'address'].forEach(id => {
+    const input = document.getElementById(id);
+    if(input) input.addEventListener('input', saveState);
+  });
+
+  renderAdminGrid();
+  setupDatePicker();
+  renderProducts();
+  update();
+};
+</script>
+</body>
+</html>
